@@ -1,0 +1,22 @@
+{
+  "name": "nifty-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/nifty-markets-build/nifty-backend.git",
+  "author": "jdspell <spelljd15@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "server": "node index.js",
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cross-env": "^5.2.0",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "helmet": "^3.16.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.16.5",
+    "sqlite3": "^4.0.6"
+  }
+}
