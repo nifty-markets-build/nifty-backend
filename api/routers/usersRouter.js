@@ -85,17 +85,15 @@ usersRouter.delete('/:id', authenticate, async (req, res) => {
 //updates a field for the user
 usersRouter.put('/:id', authenticate, async (req, res) => {
     try {
-        console.log({...req.body});
         const count = await db('users')
             .where({ userId: req.params.id })
             .first()
             .update({...req.body});
 
         if(count) {
-            console.log(count);
             res.status(200).json(count);
         } else {
-            res.status(400).json({ message: "Unable to delete user." });
+            res.status(400).json({ message: "Unable to update user." });
         }
     } catch (error) {
         res.status(500).json(error);
