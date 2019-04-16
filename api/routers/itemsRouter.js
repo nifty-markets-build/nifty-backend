@@ -5,27 +5,36 @@ const itemsRouter = express.Router();
 
 const { authenticate, jwtKey } = require('../auth/authenticate.js');
 
-itemsRouter.get('/', async (req, res) => {
+itemsRouter.get('/:userId', async (req, res) => {
     try {
-        const items = await db('items');
+        const items = await db('items')
+            .where({ userId: req.params.userId })
+            .first();
+        
         res.status(200).json(items);
     } catch (error) {
         res.status(500).json(error);
     }
 });
 
-itemsRouter.post('/', async (req, res) => {
+itemsRouter.post('/:userId', async (req, res) => {
     try {
         const newItem = req.body;
-        const [id] = await db('items').insert(newItem);
-        const item = await db('items').where({ itemId: id }).first();
+        newItem.userId = req.params.userId;
+
+        const [id] = await db('items')
+            .insert(newItem);
+        const item = await db('items')
+            .where({ itemId: id })
+            .first();
+
         res.status(200).json(item)
     } catch (error) {
         res.status(500).json(error);
     }
 });
 
-itemsRouter.delete('/:id', async (req, res) => {
+itemsRouter.delete('/:userId/:id', async (req, res) => {
     try {
         const count = await db('items')
             .where({ itemId: req.params.id })
@@ -41,7 +50,7 @@ itemsRouter.delete('/:id', async (req, res) => {
     }
 });
 
-itemsRouter.put('/:id', async (req, res) => {
+itemsRouter.put('/:userId/:id', async (req, res) => {
     try {
         const count = await db('items')
             .where({ itemId: req.params.id })

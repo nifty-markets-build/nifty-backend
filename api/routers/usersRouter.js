@@ -55,7 +55,7 @@ usersRouter.post('/login', async (req, res) => {
         //checks whether password matches the user that was found in the db
         if(user && bcrypt.compareSync(password, user.password)){
             const token = generateToken(user);
-            res.status(200).json({ message: "logged in", token });
+            res.status(200).json({ message: "logged in", token, userId: user.userId });
 
         } else {
             res.status(400).json({ message: "Invalid credentials." });
