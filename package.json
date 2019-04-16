@@ -6,8 +6,8 @@
   "author": "jdspell <spelljd15@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "server": "node index.js",
-    "start": "nodemon index.js",
+    "server": "nodemon index.js",
+    "start": "node index.js",
     "test": "cross-env DB_ENV=testing jest --watch --verbose"
   },
   "dependencies": {
