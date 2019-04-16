@@ -14,9 +14,9 @@ module.exports = {
   },
 
   testing: {
-    client: './database/marketplace.sqlite3',
+    client: 'sqlite3',
     connection: {
-      filename: './dev.sqlite3'
+      filename: './database/marketplace.sqlite3',
     },
     useNullAsDefault: true,
     migrations: {
