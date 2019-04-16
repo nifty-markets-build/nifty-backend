@@ -1,15 +1,15 @@
 # nifty-backend
 
 Dependencies:
-*express
-*helmet
-*knex
-*sqlite3
-*bcryptjs
-*jsonwebtoken
-*dotenv
-*cross-env
-*cors
+* express
+* helmet
+* knex
+* sqlite3
+* bcryptjs
+* jsonwebtoken
+* dotenv
+* cross-env
+* cors
 
 Users Endpoints
 
