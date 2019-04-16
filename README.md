@@ -11,6 +11,8 @@ Dependencies:
 -cross-env
 -cors
 
+Users Endpoints
+
 | Method | Endpoint | Requires | Description |
 | ------ |:--------:|:--------:| -----------:|
 | GET    | /users   | nothing | shows users for troubleshooting |
