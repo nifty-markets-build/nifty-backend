@@ -5,19 +5,29 @@ const itemsRouter = express.Router();
 
 const { authenticate, jwtKey } = require('../auth/authenticate.js');
 
-itemsRouter.get('/:userId', async (req, res) => {
+//gets all items for marketplace
+itemsRouter.get('/', authenticate, async (req, res) => {
     try {
-        const items = await db('items')
-            .where({ userId: req.params.userId })
-            .first();
-        
+        const items = await db('items');
         res.status(200).json(items);
     } catch (error) {
         res.status(500).json(error);
     }
 });
 
-itemsRouter.post('/:userId', async (req, res) => {
+//gets user items
+itemsRouter.get('/:userId', authenticate, async (req, res) => {
+    try {
+        const userItems = await db('items')
+            .where({ userId: req.params.userId });
+        
+        res.status(200).json(userItems);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+itemsRouter.post('/:userId', authenticate, async (req, res) => {
     try {
         const newItem = req.body;
         newItem.userId = req.params.userId;
@@ -34,7 +44,7 @@ itemsRouter.post('/:userId', async (req, res) => {
     }
 });
 
-itemsRouter.delete('/:userId/:id', async (req, res) => {
+itemsRouter.delete('/:userId/:id', authenticate, async (req, res) => {
     try {
         const count = await db('items')
             .where({ itemId: req.params.id })
@@ -50,7 +60,7 @@ itemsRouter.delete('/:userId/:id', async (req, res) => {
     }
 });
 
-itemsRouter.put('/:userId/:id', async (req, res) => {
+itemsRouter.put('/:userId/:id', authenticate, async (req, res) => {
     try {
         const count = await db('items')
             .where({ itemId: req.params.id })
