@@ -6,7 +6,7 @@ const itemsRouter = express.Router();
 const { authenticate, jwtKey } = require('../auth/authenticate.js');
 
 //gets all items for marketplace
-itemsRouter.get('/', authenticate, async (req, res) => {
+itemsRouter.get('/', async (req, res) => {
     try {
         const items = await db('items');
         res.status(200).json(items);

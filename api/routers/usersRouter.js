@@ -108,6 +108,9 @@ const generateToken = (user) => {
 
     const options = {
         expiresIn: '1d',
+        issuer: 'niftymarkets',
+        audience: 'niftymarkets',
+        subject: user.userId.toString(),
     }
 
     return jwt.sign(payload, jwtKey, options);
