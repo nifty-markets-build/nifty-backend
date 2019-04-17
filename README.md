@@ -31,3 +31,10 @@ Items Endpoints
 | POST   | /items/:userId | user ID | Creates an item. |
 | DELETE | /items/:userId/:id | user ID, item ID | Deletes the item. |
 | PUT    | /items/:userId/:id | user ID, item ID | Updates the item. |
+
+Transaction Endpoints
+
+| Method | Endpoint | Requires | Description |
+| ------ |:--------:|:--------:| -----------:|
+| GET    | /transactions/:userId   | nothing | shows users for troubleshooting |
+| POST   | /transactions/:userId | username, password, first name, last name, email | Adds a new user. |
