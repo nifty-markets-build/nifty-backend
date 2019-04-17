@@ -17,6 +17,18 @@ usersRouter.get('/', async (req, res) => {
     }
 });
 
+usersRouter.get('/:userId', authenticate, async (req, res) => {
+    try {
+        const user = await db('users')
+            .where({ userId: req.params.userId })
+            .first();
+        
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+})
+
 //register functionality
 usersRouter.post('/register', async (req, res) => {
     try {
