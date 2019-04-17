@@ -15,6 +15,19 @@ itemsRouter.get('/', async (req, res) => {
     }
 });
 
+//gets a single item from the marketplace
+itemsRouter.get('/:itemId', async (req, res) => {
+    try {
+        const item = await db('items')
+            .where({ itemId: req.params.itemId })
+            .first();
+        
+        res.status(200).json(item);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
 //gets user items
 itemsRouter.get('/:userId', authenticate, async (req, res) => {
     try {
