@@ -16,7 +16,7 @@ itemsRouter.get('/', async (req, res) => {
 });
 
 //gets a single item from the marketplace
-itemsRouter.get('/:itemId', async (req, res) => {
+itemsRouter.get('/item/:itemId', async (req, res) => {
     try {
         const item = await db('items')
             .where({ itemId: req.params.itemId })
