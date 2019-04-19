@@ -5,9 +5,10 @@ const userCartRouter = express.Router();
 
 const { authenticate, jwtKey } = require('../auth/authenticate.js');
 
-userCartRouter.get('/:userId', authenticate, async (req, res) => {
+//get all items from a users cart
+userCartRouter.get('/items/:userId', authenticate, async (req, res) => {
     try {
-        const items = await db('user_cart')
+        const items = await db('usersCarts')
             .where({ userId: req.params.userId });
         res.status(200).json(items);
     } catch (error) {
@@ -15,19 +16,29 @@ userCartRouter.get('/:userId', authenticate, async (req, res) => {
     }
 });
 
-userCartRouter.post('/:userId', authenticate, async (req, res) => {
+//add a new item to the users cart
+userCartRouter.post('/items/:userId', authenticate, async (req, res) => {
     try {
-        const newItem = await db('user_cart')
-            .insert(req.body);
-        res.status(200).json(newItem);
+        const item = req.body;
+        item.userId = req.params.userId;
+
+        const [id] = await db('usersCarts')
+            .insert(item);
+
+        const cartItem = await db('usersCarts')
+            .where({ userId: id })
+            .first();
+
+        res.status(200).json(cartItem);
     } catch (error) {
         res.status(500).json(error);
     }
 });
 
+//get an item from the user's cart
 userCartRouter.get('/:userId/:itemId', authenticate, async (req, res) => {
     try {
-        const items = await db('user_cart')
+        const items = await db('usersCarts')
             .where({ userId: req.params.userId })
             .where({ itemId: req.params.itemId })
             ;
@@ -37,6 +48,7 @@ userCartRouter.get('/:userId/:itemId', authenticate, async (req, res) => {
     }
 });
 
+//delete an item from a users cart
 userCartRouter.delete('/userId/:itemId', authenticate, async (req, res) => {
     try {
 

@@ -28,7 +28,7 @@ Items Endpoints
 | Method | Endpoint | Requires | Description | Returns |
 | ------ |:--------:|:--------:|:-----------:| -------:|
 | GET    | /items   | nothing  | Fetches all items in marketplace. | All items in marketplace. |
-| GET    | /items/:itemId   | item ID  | Fetches single item from marketplace. | Item from marketplace. |
+| GET    | /items/item/:itemId   | item ID  | Fetches single item from marketplace. | Item from marketplace. |
 | GET    | /items/:userId | user ID | Fetches the user's items. | All the users items. |
 | POST   | /items/:userId | user ID | Creates an item. | Returns the created item. |
 | DELETE | /items/:userId/:id | user ID, item ID | Deletes the item. | Count of deleted items. |

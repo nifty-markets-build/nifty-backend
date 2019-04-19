@@ -8,7 +8,7 @@ const { authenticate, jwtKey } = require('../auth/authenticate.js');
 //gets user transaction history
 transactionsRouter.get('/:userId', authenticate, async (req, res) => {
     try {
-        const userTransactions = await db('tranactions')
+        const userTransactions = await db('transactions')
             .where({ userId: req.params.userId });
         
         res.status(200).json(userTransactions);
